@@ -5,6 +5,10 @@ import { randomUUID } from "crypto";
 export class InMemoryTasksRepository implements TasksRepository {
   public items: Task[] = [];
 
+  async getAll(page: number) {
+    return this.items.slice((page - 1) * 20, page * 20);
+  }
+
   async create(data: Prisma.TaskCreateInput) {
     const task = {
       id: data.id ?? randomUUID(),
