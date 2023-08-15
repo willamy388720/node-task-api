@@ -5,6 +5,14 @@ import { randomUUID } from "crypto";
 export class InMemoryTasksRepository implements TasksRepository {
   public items: Task[] = [];
 
+  async search(query: string, page: number) {
+    return this.items
+      .filter(
+        (item) => item.title.includes(query) || item.description.includes(query)
+      )
+      .slice((page - 1) * 20, page * 20);
+  }
+
   async getAll(page: number) {
     return this.items.slice((page - 1) * 20, page * 20);
   }
