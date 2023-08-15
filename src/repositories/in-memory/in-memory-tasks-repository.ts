@@ -15,6 +15,12 @@ export class InMemoryTasksRepository implements TasksRepository {
     return task;
   }
 
+  async delete(task: Task) {
+    const taskIndex = this.items.findIndex((item) => item.id === task.id);
+
+    this.items.splice(taskIndex, 1);
+  }
+
   async search(query: string, page: number) {
     return this.items
       .filter(
