@@ -5,6 +5,16 @@ import { randomUUID } from "crypto";
 export class InMemoryTasksRepository implements TasksRepository {
   public items: Task[] = [];
 
+  async findById(id: string) {
+    const task = this.items.find((item) => item.id === id);
+
+    if (!task) {
+      return null;
+    }
+
+    return task;
+  }
+
   async search(query: string, page: number) {
     return this.items
       .filter(
@@ -15,6 +25,16 @@ export class InMemoryTasksRepository implements TasksRepository {
 
   async getAll(page: number) {
     return this.items.slice((page - 1) * 20, page * 20);
+  }
+
+  async save(task: Task) {
+    const taskIndex = this.items.findIndex((item) => item.id === task.id);
+
+    if (taskIndex >= 0) {
+      this.items[taskIndex] = task;
+    }
+
+    return task;
   }
 
   async create(data: Prisma.TaskCreateInput) {

@@ -5,7 +5,7 @@ import { SearchTasksService } from "@/services/tasks/search-tasks";
 let tasksRepository: InMemoryTasksRepository;
 let sut: SearchTasksService;
 
-describe("Fetch Tasks Service", () => {
+describe("Search Tasks Service", () => {
   beforeEach(() => {
     tasksRepository = new InMemoryTasksRepository();
     sut = new SearchTasksService(tasksRepository);
