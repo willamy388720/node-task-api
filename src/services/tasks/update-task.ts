@@ -1,5 +1,6 @@
 import { Task } from "@prisma/client";
 import { TasksRepository } from "@/repositories/tasks-repository";
+import { ResourceNotFoundError } from "../errors/resources-not-found-error";
 
 interface UpdateTaskServiceRequest {
   id: string;
@@ -22,7 +23,7 @@ export class UpdateTaskService {
     const task = await this.tasksRepository.findById(id);
 
     if (!task) {
-      throw new Error("Task not found");
+      throw new ResourceNotFoundError();
     }
 
     if (title) {
