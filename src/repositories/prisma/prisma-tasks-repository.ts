@@ -22,10 +22,14 @@ export class PrismaTasksRepository implements TasksRepository {
       where: {
         OR: [
           {
-            title: query,
+            title: {
+              contains: query,
+            },
           },
           {
-            description: query,
+            description: {
+              contains: query,
+            },
           },
         ],
       },
