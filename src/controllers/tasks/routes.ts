@@ -4,6 +4,7 @@ import { show } from "./show";
 import { search } from "./search";
 import { update } from "./update";
 import { destroy } from "./destroy";
+import { complete } from "./complete";
 
 export async function tasksRoutes(app: FastifyInstance) {
   app.post("/tasks", create);
@@ -11,4 +12,5 @@ export async function tasksRoutes(app: FastifyInstance) {
   app.get("/tasks/search", search);
   app.put("/tasks/:id", update);
   app.delete("/tasks/:id", destroy);
+  app.patch("/tasks/:id/complete", complete);
 }
